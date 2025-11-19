@@ -126,35 +126,6 @@
         </ol>
       </section>
 
-      <section class="section revenue reveal">
-        <div class="revenue__intro">
-          <p class="eyebrow">Финансовый рост</p>
-          <h2>Динамика дохода DagDocker Labs</h2>
-          <p>
-            За последние восемь лет Али превратил DagDocker Labs в мотор
-            региональной экономики. Ниже — визуальная история того, как
-            растёт выручка компании на фоне экспансии и новых продуктов.
-          </p>
-          <ul class="revenue__highlights">
-            <li>Среднегодовой рост выше 40%</li>
-            <li>Пик заказов в 2024 после выхода на Ближний Восток</li>
-            <li>Планы удержать тренд за счёт AI-оркестрации контейнеров</li>
-          </ul>
-        </div>
-        <div class="revenue__chart-card">
-          <canvas id="revenueChart" aria-label="График дохода DagDocker Labs" role="img"></canvas>
-          <div class="revenue__badges">
-            <div>
-              <p class="revenue__badge-label">Доход 2024</p>
-              <p class="revenue__badge-value">18,4 млрд ₽</p>
-            </div>
-            <div>
-              <p class="revenue__badge-label">CAGR</p>
-              <p class="revenue__badge-value">42%</p>
-            </div>
-          </div>
-        </div>
-      </section>
     </main>
 
     <footer id="contact" class="footer">
@@ -166,77 +137,7 @@
         <p>© 2025 DagDocker Labs. Все права защищены.</p>
       </div>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
     <script>
-      const ctx = document.getElementById("revenueChart").getContext("2d");
-      const gradient = ctx.createLinearGradient(0, 0, 0, 300);
-      gradient.addColorStop(0, "rgba(47, 208, 128, 0.6)");
-      gradient.addColorStop(1, "rgba(47, 208, 128, 0)");
-
-      const data = {
-        labels: ["2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024"],
-        datasets: [
-          {
-            label: "Выручка, млрд ₽",
-            data: [2.1, 3.4, 4.8, 6.5, 9.1, 12.3, 15.6, 18.4],
-            tension: 0.4,
-            fill: true,
-            backgroundColor: gradient,
-            borderColor: "#2fd080",
-            pointBackgroundColor: "#04110c",
-            pointBorderColor: "#2fd080",
-            pointBorderWidth: 2,
-            pointRadius: 5,
-            pointHoverRadius: 6,
-          },
-        ],
-      };
-
-      new Chart(ctx, {
-        type: "line",
-        data,
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              display: false,
-            },
-            tooltip: {
-              backgroundColor: "rgba(4, 17, 12, 0.9)",
-              titleColor: "#f0f4ff",
-              bodyColor: "#f0f4ff",
-              borderColor: "rgba(255, 255, 255, 0.1)",
-              borderWidth: 1,
-              padding: 12,
-              callbacks: {
-                label: (ctx) => ` ${ctx.raw.toFixed(1)} млрд ₽`,
-              },
-            },
-          },
-          scales: {
-            x: {
-              grid: {
-                display: false,
-              },
-              ticks: {
-                color: "#8da2c7",
-              },
-            },
-            y: {
-              beginAtZero: true,
-              grid: {
-                color: "rgba(255, 255, 255, 0.05)",
-              },
-              ticks: {
-                color: "#8da2c7",
-                callback: (value) => `${value} ₽`,
-              },
-            },
-          },
-        },
-      });
-
       const matrixCanvas = document.getElementById("matrixCanvas");
       if (matrixCanvas) {
         const matrixCtx = matrixCanvas.getContext("2d");
