@@ -23,6 +23,10 @@
     />
   </head>
   <body>
+    <div class="matrix" aria-hidden="true">
+      <canvas id="matrixCanvas"></canvas>
+    </div>
+
     <header class="hero">
       <div class="hero__content reveal">
         <p class="hero__eyebrow">Основатель DagDocker Labs</p>
@@ -232,6 +236,48 @@
           },
         },
       });
+
+      const matrixCanvas = document.getElementById("matrixCanvas");
+      if (matrixCanvas) {
+        const matrixCtx = matrixCanvas.getContext("2d");
+        const charset = "01абвгдеёжзийклмнопрстуфхцчшщъыьэюя";
+        let width;
+        let height;
+        let columns;
+        let drops;
+
+        const resize = () => {
+          width = matrixCanvas.width = window.innerWidth;
+          height = matrixCanvas.height = window.innerHeight;
+          columns = Math.floor(width / 18);
+          drops = Array.from({ length: columns }, () => Math.random() * height);
+        };
+
+        const draw = () => {
+          matrixCtx.fillStyle = "rgba(6, 11, 23, 0.08)";
+          matrixCtx.fillRect(0, 0, width, height);
+          matrixCtx.fillStyle = "rgba(47, 208, 128, 0.8)";
+          matrixCtx.font = "16px 'Courier New', monospace";
+
+          drops.forEach((y, idx) => {
+            const char = charset[Math.floor(Math.random() * charset.length)];
+            const x = idx * 18;
+            matrixCtx.fillText(char, x, y);
+
+            if (y > height && Math.random() > 0.975) {
+              drops[idx] = 0;
+            } else {
+              drops[idx] = y + 18;
+            }
+          });
+
+          requestAnimationFrame(draw);
+        };
+
+        resize();
+        draw();
+        window.addEventListener("resize", resize);
+      }
     </script>
   </body>
 </html>
